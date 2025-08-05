@@ -8,6 +8,7 @@ import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
+
 const page = () => {
   const emotions = [
     { value: 0, label: "😔 Down", color: "from-blue-500/50" },
@@ -229,6 +230,8 @@ const page = () => {
           </div>
         </div>
       </section>
+
+      
     </div>
   );
 };
