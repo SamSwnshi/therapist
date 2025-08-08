@@ -10,8 +10,10 @@ import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { Container } from '@/components/ui/container';
 import { useTheme } from "next-themes";
 const Login = () => {
+  
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
+    
     const [loading, setLoading] = useState(false);
     const { theme } = useTheme();
     return (
@@ -21,10 +23,10 @@ const Login = () => {
 
                     <div className="mb-2 text-center">
                         <h1 className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent mb-1 tracking-tight">
-                            Sign In
+                            Login
                         </h1>
                         <p className="text-base text-muted-foreground font-medium">
-                            Welcome back! Please sign in to continue your journey.
+                            Welcome back! Please login in to continue your journey.
                         </p>
                     </div>
 
