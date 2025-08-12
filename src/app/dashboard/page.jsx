@@ -8,9 +8,7 @@ import { Activity, ArrowRight, Brain, BrainCircuit, Heart, Loader2, MessageSquar
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
-
   format,
-
 } from "date-fns";
 
 import {
@@ -239,7 +237,7 @@ const Dashboard = () => {
               Move the slider to track your current mood
             </DialogDescription>
           </DialogHeader>
-          <MoodForm onSuccess={() => setShowMoodModal(false)} />
+          {/* <MoodForm onSuccess={() => setShowMoodModal(false)} /> */}
         </DialogContent>
       </Dialog>
     </div>
