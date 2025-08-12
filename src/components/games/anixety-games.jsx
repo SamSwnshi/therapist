@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dialog";
 import { BreathingGame } from "./breathing-games";
 import { ZenGarden } from "./zen-garden";
-// import { ForestGame } from "./forest-game";
+import { ForestGame } from "./forest-game";
 // import { OceanWaves } from "./ocean-waves";
 
 const games = [
@@ -88,7 +88,7 @@ export const AnxietyGames = ({ onGamePlayed }) => {
             case "garden":
             return <ZenGarden />;
             case "forest":
-            // return <ForestGame />;
+            return <ForestGame />;
             case "waves":
             // return <OceanWaves />;
             default:
