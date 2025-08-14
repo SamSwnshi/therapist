@@ -19,10 +19,12 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { AnxietyGames } from "@/components/games/anixety-games";
+import { MoodForm } from "@/components/mood/mood-form";
 
 const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showMoodModal, setShowMoodModal] = useState(false);
+  const [isSavingMood,setIsSavingMood] = useState(false)
 
 
   useEffect(() => {
@@ -64,6 +66,23 @@ const Dashboard = () => {
       description: "Planned for today",
     },
   ];
+
+  const handleMoodSubmit = async (data) => {
+    setIsSavingMood(true);
+    try {
+      await saveMoodData({
+        userId: "default-user",
+        mood: data.moodScore,
+        note: "",
+      });
+      setShowMoodModal(false);
+    } catch (error) {
+      console.error("Error saving mood:", error);
+    } finally {
+      setIsSavingMood(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Container className="pt-20 pb-8 space-y-6">
@@ -237,7 +256,7 @@ const Dashboard = () => {
               Move the slider to track your current mood
             </DialogDescription>
           </DialogHeader>
-          {/* <MoodForm onSuccess={() => setShowMoodModal(false)} /> */}
+          <MoodForm onSubmit={handleMoodSubmit} isLoading = {isSavingMood} />
         </DialogContent>
       </Dialog>
     </div>
