@@ -1,13 +1,12 @@
 import express from "express";
+import dotenv from 'dotenv'
 import { serve } from "inngest/express";
 import { inngest } from "./inngest/index.js";
 import { functions as inngestFunctions } from "./inngest/function.js";
 import connectDb from './utils/db.js'
-import dotenv from 'dotenv'
-
 import { logger } from "./utils/logger.js";
 dotenv.config()
-const PORT = 3000;
+
 const app = express();
 
 app.use(express.json());
