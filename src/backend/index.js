@@ -5,9 +5,17 @@ import { inngest } from "./inngest/index.js";
 import { functions as inngestFunctions } from "./inngest/function.js";
 import connectDb from './utils/db.js'
 import { logger } from "./utils/logger.js";
+import cors from 'cors';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import authRoutes from './routes/auth.routes.js'
 dotenv.config()
 
 const app = express();
+
+app.use(cors())
+app.use(helmet())
+app.use(morgan("dev"))
 
 app.use(express.json());
 
@@ -15,6 +23,8 @@ app.use(
   "/api/inngest",
   serve({ client: inngest, functions: inngestFunctions })
 );
+
+app.use('/auth',authRoutes)
 
 const startServer = async () => {
   try {

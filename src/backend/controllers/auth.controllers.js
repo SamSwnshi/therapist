@@ -1,5 +1,5 @@
 import User from "../models/User.models.js";
-import Session from "../models/Session.modesls.js";
+import Session from "../models/Session.models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 
