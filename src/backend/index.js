@@ -9,6 +9,10 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import authRoutes from './routes/auth.routes.js'
+import chatRouter from "./routes/chat.routes.js";
+import moodRouter from "./routes/mood.routes.js";
+import activityRouter from "./routes/activity.routes.js";
+
 dotenv.config()
 
 const app = express();
@@ -25,6 +29,9 @@ app.use(
 );
 
 app.use('/auth',authRoutes)
+app.use("/chat", chatRouter);
+app.use("/api/mood", moodRouter);
+app.use("/api/activity", activityRouter);
 
 const startServer = async () => {
   try {
