@@ -9,13 +9,43 @@ import Link from 'next/link'
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { Container } from '@/components/ui/container';
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
+import { useSession } from "@/lib/contexts/session-context";
 const Login = () => {
-  
+    const router = useRouter();
+    const { checkSession } = useSession();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
-    
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const { theme } = useTheme();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+        try {
+            const response = await loginUser(email, password);
+
+            // Store the token in localStorage
+            localStorage.setItem("token", response.token);
+
+            // Update session state
+            await checkSession();
+
+            // Wait for state to update before redirecting
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            router.push("/dashboard");
+        } catch (err) {
+            setError(
+                err instanceof Error
+                    ? err.message
+                    : "Invalid email or password. Please try again."
+            );
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className='min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-secondary/30 tracking-wide'>
             <Container className="flex flex-col items-center justify-center w-full">
@@ -30,7 +60,7 @@ const Login = () => {
                         </p>
                     </div>
 
-                    <form className="space-y-6" >
+                    <form className="space-y-6" onSubmit={handleSubmit} >
                         <div className="space-y-3">
                             <div>
                                 <label
@@ -73,11 +103,11 @@ const Login = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* {error && (
+                        {error && (
                             <p className="text-red-500 text-base text-center font-medium">
                                 {error}
                             </p>
-                        )} */}
+                        )}
                         <ShimmerButton className="w-full py-1 text-base rounded-xl font-bold bg-gradient-to-r from-primary to-primary/80  hover:from-primary/80 hover:to-primary ">
                             <span
                                 className="bg-transparent dark:text-white py-2"

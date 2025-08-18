@@ -1,14 +1,15 @@
 'use client'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { AudioLines, Menu, X } from 'lucide-react';
+import { AudioLines, LogOut, Menu, X } from 'lucide-react';
 import ThemeToggle from '@/components/Themetoggle';
 import SignInButton from './auth/sign-in';
 import { Button } from './ui/button';
-
+import { useSession } from "@/lib/contexts/session-context";
 
 
 const Header = () => {
+    const { isAuthenticated, logout, user } = useSession();
 
     const navItems = [
         { href: "/features", label: "Features" },
@@ -38,7 +39,29 @@ const Header = () => {
                         </nav>
                         <div className='flex items-center gap-3'>
                             <ThemeToggle />
-                            <SignInButton />
+                            {isAuthenticated ? (
+                                <>
+                                    <Button
+                                        asChild
+                                        className="hidden md:flex gap-2 bg-primary/90 hover:bg-primary"
+                                    >
+                                        <Link href="/dashboard">
+                                            <MessageCircle className="w-4 h-4 mr-1" />
+                                            Start Chat
+                                        </Link>
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        onClick={logout}
+                                        className="text-muted-foreground hover:text-foreground transition-colors"
+                                    >
+                                        <LogOut className="w-4 h-4 mr-2" />
+                                        Sign out
+                                    </Button>
+                                </>
+                            ) : (
+                                <SignInButton />
+                            )}
 
                             <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? (<X className='h-5 w-5' />) : (<Menu className='h-5 w-5' />)}</Button>
                         </div>
@@ -57,7 +80,7 @@ const Header = () => {
                                     {item.label}
                                 </Link>
                             ))}
-                            </nav>
+                        </nav>
                     </div>
                 )}
             </header>
