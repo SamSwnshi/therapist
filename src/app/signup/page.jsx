@@ -9,13 +9,34 @@ import Link from 'next/link'
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { Container } from '@/components/ui/container';
 import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
+import { registerUser } from '@/lib/api/auth'
 const Signup = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("")
     const { theme } = useTheme();
+    const router = useRouter()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+        if (password !== confirmPassword) {
+            setError("Passwords do not match.");
+            return;
+        }
+        setLoading(true);
+        try {
+            await registerUser(name, email, password);
+            router.push("/login");
+        } catch (err) {
+            setError(err.message || "Signup failed. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className='min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-secondary/30 tracking-wide'>
             <Container className="flex flex-col items-center justify-center w-full">
@@ -30,7 +51,7 @@ const Signup = () => {
                         </p>
                     </div>
 
-                    <form className="space-y-6" >
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <div className="space-y-4">
                             <div className='l md:flex-row gap-4'>
                                 <div className="flex-1 mb-3">
@@ -117,11 +138,11 @@ const Signup = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* {error && (
+                        {error && (
                             <p className="text-red-500 text-base text-center font-medium">
                                 {error}
                             </p>
-                        )} */}
+                        )}
                         <ShimmerButton className="w-full py-1 text-base rounded-xl font-bold bg-gradient-to-r from-primary to-primary/80  hover:from-primary/80 hover:to-primary ">
                             <span
                                 className="bg-transparent dark:text-white py-2"
