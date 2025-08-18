@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
+// Define chat message schema
 const chatMessageSchema = new Schema({
   role: {
     type: String,
@@ -23,6 +24,7 @@ const chatMessageSchema = new Schema({
   },
 });
 
+// Define chat session schema
 const chatSessionSchema = new Schema(
   {
     sessionId: {
@@ -37,6 +39,7 @@ const chatSessionSchema = new Schema(
   }
 );
 
+// Create model
 const ChatSession = mongoose.model("ChatSession", chatSessionSchema);
 
 export default ChatSession;

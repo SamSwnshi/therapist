@@ -1,6 +1,6 @@
-import { inngest } from "./client";
+import { inngest } from "./client.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { logger } from "../utils/logger";
+import { logger } from "../utils/logger.js";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 

@@ -1,9 +1,9 @@
 import { Mood } from "../models/Mood.models.js";
-import logger from '../utils/logger.js'
-const { sendMoodUpdateEvent } = require("../utils/inngestEvents");
+import {logger} from '../utils/logger.js'
+import { sendMoodUpdateEvent } from "../utils/inngestEvents.js";
 
 // Create a new mood entry
-const createMood = async (req, res, next) => {
+export const createMood = async (req, res, next) => {
     try {
         const { score, note, context, activities } = req.body;
         const userId = req.user ? req.user._id : null; // From auth middleware
@@ -44,4 +44,4 @@ const createMood = async (req, res, next) => {
     }
 };
 
-module.exports = { createMood };
+

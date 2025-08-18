@@ -1,4 +1,4 @@
-import {inngest} from './index.js'
+import {inngest} from './client.js'
 import {functions as aiFuctions} from './aiFunctions.js'
 
 

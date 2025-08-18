@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from 'dotenv'
 import { serve } from "inngest/express";
-import { inngest } from "./inngest/index.js";
+import { inngest } from "./inngest/client.js";
 import { functions as inngestFunctions } from "./inngest/function.js";
 import connectDb from './utils/db.js'
 import { logger } from "./utils/logger.js";

@@ -1,5 +1,5 @@
 // Remove TypeScript imports/types
-import { Activity } from "../models/Activity.js";
+import  Activity  from "../models/Activity.models.js";
 import { logger } from "../utils/logger.js";
 import { sendActivityCompletionEvent } from "../utils/inngestEvents.js";
 

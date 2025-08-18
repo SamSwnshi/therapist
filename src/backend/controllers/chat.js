@@ -1,14 +1,14 @@
-import { ChatSession } from "../models/ChatSession.js";
+import  ChatSession  from "../models/Chat.models.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { v4 as uuidv4 } from "uuid";
 import { logger } from "../utils/logger.js";
 import { inngest } from "../inngest/client.js";
-import { User } from "../models/User.js";
+import  User  from "../models/User.models.js";
 import { Types } from "mongoose";
 
 // Initialize Gemini API
 const genAI = new GoogleGenerativeAI(
-  process.env.GEMINI_API_KEY || "AIzaSyBCBz3wQu9Jjd_icCDZf-17CUO_O8IynwI"
+  process.env.GEMINI_API_KEY 
 );
 
 // Create a new chat session
@@ -255,7 +255,7 @@ const getChatHistory = async (req, res) => {
   }
 };
 
-module.exports = {
+export  {
   createChatSession,
   sendMessage,
   getSessionHistory,
