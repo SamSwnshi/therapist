@@ -36,7 +36,7 @@ app.use("/api/activity", activityRouter);
 const startServer = async () => {
   try {
     await connectDb()
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 3001;
     app.listen(PORT, () => {
       logger.info(`Server is running on port ${PORT}`);
       logger.info(

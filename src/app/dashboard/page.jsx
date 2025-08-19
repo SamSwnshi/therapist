@@ -22,6 +22,8 @@ import { MoodForm } from "@/components/mood/mood-form";
 import { ActivityLogger } from "@/components/activities/activity-logged";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/contexts/session-context";
+
+
 const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showMoodModal, setShowMoodModal] = useState(false);
@@ -29,6 +31,7 @@ const Dashboard = () => {
   const [showActivityLogger, setShowActivityLogger] = useState(false)
   const router = useRouter()
     const { user } = useSession();
+    console.log(user)
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -100,7 +103,7 @@ const Dashboard = () => {
           <motion.div initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             className="space-y-2">
-            <h1 className="text-3xl font-bold">Welcome Back {user}</h1>
+            <h1 className="text-3xl font-bold">Welcome Back {user?.name}</h1>
             <p className="text-muted-foreground">
               {currentTime.toLocaleDateString("en-US", {
                 weekday: "long",

@@ -1,4 +1,4 @@
-  import { Router } from "express";
+import { Router } from "express";
 import { register, login, logout } from "../controllers/auth.controllers.js";
 import { auth } from "../middleware/auth.middleware.js";
 
@@ -15,6 +15,7 @@ router.post("/logout", auth, logout);
 
 // GET /auth/me
 router.get("/me", auth, (req, res) => {
+  console.log("User details:", req.user);
   res.json({ user: req.user });
 });
 

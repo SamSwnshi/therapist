@@ -3,7 +3,6 @@ import React from 'react'
 import { useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { Lock, Mail } from 'lucide-react'
 import Link from 'next/link'
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
@@ -11,6 +10,8 @@ import { Container } from '@/components/ui/container';
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/contexts/session-context";
+import { loginUser } from '@/lib/api/auth'
+
 const Login = () => {
     const router = useRouter();
     const { checkSession } = useSession();
@@ -75,7 +76,7 @@ const Login = () => {
                                         id="email"
                                         type="email"
                                         placeholder="Enter your email"
-                                        className="pl-12 py-4 text-base rounded-xl bg-card bg-opacity-80 border border-primary focus:outline-none focus:ring-2 focus:ring-primary text-white placeholder:text-muted-foreground"
+                                        className="pl-12 py-4 text-base rounded-xl bg-card bg-opacity-80 border border-primary focus:outline-none focus:ring-2 focus:ring-primary text-white  placeholder:text-muted-foreground"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         required

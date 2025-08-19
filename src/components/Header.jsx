@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { AudioLines, LogOut, Menu, X } from 'lucide-react';
+import { AudioLines, LogOut, Menu, MessageCircle, X } from 'lucide-react';
 import ThemeToggle from '@/components/Themetoggle';
 import SignInButton from './auth/sign-in';
 import { Button } from './ui/button';
@@ -10,7 +10,7 @@ import { useSession } from "@/lib/contexts/session-context";
 
 const Header = () => {
     const { isAuthenticated, logout, user } = useSession();
-
+    console.log("Header: Auth state:", { isAuthenticated, user });
     const navItems = [
         { href: "/features", label: "Features" },
         { href: "/about", label: "About Aura" }
@@ -68,7 +68,7 @@ const Header = () => {
                     </div>
                 </div>
                 {isMenuOpen && (
-                    <div className='md:hidden border-t border-primary/10'>
+                    <div className="md:hidden border-t border-primary/10">
                         <nav className="flex flex-col space-y-1 py-4">
                             {navItems.map((item) => (
                                 <Link
@@ -80,6 +80,17 @@ const Header = () => {
                                     {item.label}
                                 </Link>
                             ))}
+                            {isAuthenticated && (
+                                <Button
+                                    asChild
+                                    className="mt-2 mx-4 gap-2 bg-primary/90 hover:bg-primary"
+                                >
+                                    <Link href="/dashboard">
+                                        <MessageCircle className="w-4 h-4" />
+                                        <span>Start Chat</span>
+                                    </Link>
+                                </Button>
+                            )}
                         </nav>
                     </div>
                 )}
