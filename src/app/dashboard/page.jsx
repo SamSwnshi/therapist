@@ -31,7 +31,7 @@ const Dashboard = () => {
   const [showActivityLogger, setShowActivityLogger] = useState(false)
   const router = useRouter()
     const { user } = useSession();
-    console.log(user)
+    
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);

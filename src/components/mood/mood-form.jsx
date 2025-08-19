@@ -80,12 +80,12 @@ export function MoodForm({ }) {
             onSuccess?.();
         } catch (error) {
             console.error("MoodForm: Error:", error);
-            toast({
-                title: "Error",
-                description:
-                    error instanceof Error ? error.message : "Failed to track mood",
-                variant: "destructive",
-            });
+            // alert({
+            //     title: "Error",
+            //     description:
+            //         error instanceof Error ? error.message : "Failed to track mood",
+            //     variant: "destructive",
+            // });
         } finally {
             setIsLoading(false);
         }
